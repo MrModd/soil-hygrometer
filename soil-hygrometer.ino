@@ -25,6 +25,8 @@ const int min_vbatt_mvolt = 3100;
 const int air_value = 2168;
 const int water_value = 926;
 
+ZigbeeTempSensor zbSensor = ZigbeeTempSensor(ZIGBEE_ENDPOINT);
+
 inline void led_off(void) {
   digitalWrite(led, HIGH);
 }
@@ -42,8 +44,6 @@ inline void toggle_led(bool *state) {
     *state = true;
   }
 }
-
-ZigbeeTempSensor zbSensor = ZigbeeTempSensor(ZIGBEE_ENDPOINT);
 
 uint32_t get_vbatt_mvolt() {
   uint32_t vbatt = 0;
@@ -146,9 +146,9 @@ void setup() {
   Serial.begin(115200);
   log_i("Hello world!");
 
-  // Init LED and turn it ON
+  // Init LED
   pinMode(led, OUTPUT);
-  digitalWrite(led, LOW);
+  led_off();
   // VBatt sensing
   pinMode(vbatt_pin, ANALOG);
   // Init button for factory reset
@@ -179,6 +179,7 @@ void setup() {
     ESP.restart();
   }
 
+  led_on();
   if (first_reset) {
     wait_for_factory_reset();
   }
