@@ -5,7 +5,7 @@ This is an Arduino IDE sketch.
 
 ## Hardware requirements
 
-* [https://wiki.seeedstudio.com/xiao_esp32c6_getting_started/|Seed Studio XIAO-ESP32-C6]
+* [Seed Studio XIAO-ESP32-C6](https://wiki.seeedstudio.com/xiao_esp32c6_getting_started/)
 * Soil Moisture Sensor Hygrometer Module V1.2
 * A lithium ion battery
 
