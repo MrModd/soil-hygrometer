@@ -3,16 +3,23 @@ Zigbee soil hygrometer with an ESP32-C6
 
 This is an Arduino IDE sketch.
 
+![Zigbee Hygrometer](images/zigbee_hygrometer.jpg)
+
 ## Hardware requirements
 
 * [Seed Studio XIAO-ESP32-C6](https://wiki.seeedstudio.com/xiao_esp32c6_getting_started/)
 * Soil Moisture Sensor Hygrometer Module V1.2
 * A lithium ion battery
 
+![ESP32](images/esp32.jpg)
+
 The hygrometer sensor is wired to the analog port A0.
 A resistive divider is connected between the two poles of the battery.
 The middle point is then connected to the analog port A5 to measure
 the voltage og the battery.
+
+![Solders](images/solders.jpg)
+![Full project](images/full_project.jpg)
 
 ## Software tweaks
 
