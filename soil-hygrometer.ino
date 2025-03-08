@@ -20,7 +20,7 @@ const uint8_t vbatt_pin = 5; // A5
 const uint8_t sensor_pin = A0;
 
 const int max_vbatt_mvolt = 3800;
-const int min_vbatt_mvolt = 3100;
+const int min_vbatt_mvolt = 3300;
 // Replace these values from the readings of the soil sensor
 const int air_value = 2168;
 const int water_value = 926;
