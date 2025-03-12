@@ -12,6 +12,8 @@ through Zigbee. It can be integrated into Home Assistant.
 * [Seed Studio XIAO-ESP32-C6](https://wiki.seeedstudio.com/xiao_esp32c6_getting_started/)
 * Soil Moisture Sensor Hygrometer Module V1.2
 * A lithium ion battery
+* N-MOSFET 2N7000
+* 10kohm resistor
 
 ![ESP32](images/esp32.jpg)
 
@@ -22,6 +24,19 @@ the voltage og the battery.
 
 ![Solders](images/solders.jpg)
 ![Full project](images/full_project.jpg)
+
+The MOSFET and the resistor are optional, but they increase the battery life
+by a lot. The moisture sensor is supposed to always stay connected to the
+power pins, draining power even when the ESP32 is in deep sleep.
+The MOSFET disables the power to the sensor when the ESP doesn't need to read
+its value. The 10kohm resistor is used as pull down resitor for the gate
+of the MOSFET.
+
+![MOSFET board](images/mosfet_board.jpg)
+
+Some empirical tests showed that the moisture sensor draws about 6mA,
+sufficient to completely discarge a 350mAh battery in 38 hours.
+Measurements with the MOSFET are still ongoing...
 
 ## Software tweaks
 

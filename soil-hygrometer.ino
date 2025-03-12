@@ -18,6 +18,7 @@ const uint8_t led = LED_BUILTIN;
 const uint8_t button = BOOT_PIN;
 const uint8_t vbatt_pin = 5; // A5
 const uint8_t sensor_pin = A0;
+const uint8_t sensor_en_pin = D10;
 
 const int max_vbatt_mvolt = 3800;
 const int min_vbatt_mvolt = 3300;
@@ -43,6 +44,13 @@ inline void toggle_led(bool *state) {
     led_on();
     *state = true;
   }
+}
+inline void enable_sensor(void) {
+  digitalWrite(sensor_en_pin, HIGH);
+}
+
+inline void disable_sensor(void) {
+  digitalWrite(sensor_en_pin, LOW);
 }
 
 uint32_t get_vbatt_mvolt() {
@@ -155,6 +163,9 @@ void setup() {
   pinMode(button, INPUT_PULLUP);
   // Moisture sensor
   pinMode(sensor_pin, ANALOG);
+  // Init the sensor enable pin (it drives the N-MOSFET that cuts the power)
+  pinMode(sensor_en_pin, OUTPUT);
+  disable_sensor();
   
   bool first_reset = !get_wakeup_reason();
 
@@ -183,6 +194,9 @@ void setup() {
   if (first_reset) {
     wait_for_factory_reset();
   }
+
+  // Time to power the sensor! It may take some time to stabilize
+  enable_sensor();
 
   // Using Serial here because I want to not print \n
   Serial.println("Connecting to network");
@@ -220,6 +234,8 @@ void loop() {
   delay(100); // Let the data to be sent
 
   led_off();
+  disable_sensor();
   go_to_sleep();
+  enable_sensor();
   led_on();
 }
