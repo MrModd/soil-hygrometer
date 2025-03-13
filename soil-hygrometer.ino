@@ -165,8 +165,8 @@ void setup() {
   pinMode(sensor_pin, ANALOG);
   // Init the sensor enable pin (it drives the N-MOSFET that cuts the power)
   pinMode(sensor_en_pin, OUTPUT);
-  disable_sensor();
-  
+  enable_sensor();
+
   bool first_reset = !get_wakeup_reason();
 
   //Zigbee initial setup
@@ -194,9 +194,6 @@ void setup() {
   if (first_reset) {
     wait_for_factory_reset();
   }
-
-  // Time to power the sensor! It may take some time to stabilize
-  enable_sensor();
 
   // Using Serial here because I want to not print \n
   Serial.println("Connecting to network");
